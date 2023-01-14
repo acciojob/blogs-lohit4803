@@ -36,7 +36,8 @@ public class BlogService {
         //Updating the userInformation and changing its blogs
 
         //       fetching user by userId;
-        User currentUser = (User) userRepository1.findById(userId).get();
+        User currentUser;
+        currentUser = (User) userRepository1.findById(userId).get(userId);
 //        fetching blogList by that user
         List<Blog> blogListByUser = currentUser.getBlogList();
 //        creating blog
@@ -58,13 +59,13 @@ public class BlogService {
     public Blog findBlogById(int blogId){
         //find a blog
         final Object o;
-        o = blogRepository1.findById(blogId).get();
+        o = blogRepository1.findById(blogId).get(blogId);
         return (Blog) o;
     }
 
     public void addImage(Integer blogId, String description, String dimensions){
         //add an image to the blog after creating it
-        Blog blog = (Blog) blogRepository1.findById(blogId).get();
+        Blog blog = (Blog) blogRepository1.findById(blogId).get(blogId);
         Image image= imageService1.createAndReturn(blog,description,dimensions);
         image.setBlog(blog);
         blogRepository1.save(blog);
