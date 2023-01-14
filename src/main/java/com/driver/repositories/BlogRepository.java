@@ -7,8 +7,16 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Repository
 public interface BlogRepository extends JpaRepository<Blog, Integer> {
 
+    void save(Blog blog);
+
+    void deleteById(int blogId);
+
+    List<Blog> findAll();
+
+    List<Object> findById(int blogId);
 }
