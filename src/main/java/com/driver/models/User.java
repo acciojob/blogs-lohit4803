@@ -4,21 +4,34 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-public class User {
+@Table(name = "user")
+public class User{
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    int id;
-    private String username;
+    private int id;
+
+    private String Username;
+
     private String password;
+
     private String firstName;
+
     private String lastName;
 
-    //    connecting to blog
-    @OneToMany(mappedBy = "user",cascade =CascadeType.ALL )
+    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
     private List<Blog> blogList;
 
-//    getter,setter
 
+    public User(String Username, String password, String firstName, String lastName) {
+        this.Username = Username;
+        this.password = password;
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
+
+    public User() {
+    }
 
     public int getId() {
         return id;
@@ -29,11 +42,11 @@ public class User {
     }
 
     public String getUsername() {
-        return username;
+        return Username;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setUsername(String userName) {
+        this.Username = Username;
     }
 
     public String getPassword() {
@@ -66,18 +79,5 @@ public class User {
 
     public void setBlogList(List<Blog> blogList) {
         this.blogList = blogList;
-    }
-//    Constructor
-
-    public User(int id, String username, String password, String firstName, String lastName, List<Blog> blogList) {
-        this.id = id;
-        this.username = username;
-        this.password = password;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.blogList = blogList;
-    }
-
-    public User() {
     }
 }

@@ -1,8 +1,6 @@
 package com.driver.controller;
 
 import com.driver.models.*;
-import com.driver.repositories.BlogRepository;
-import com.driver.repositories.UserRepository;
 import com.driver.services.BlogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,24 +12,27 @@ import java.util.List;
 @RestController
 @RequestMapping("/blogs")
 public class BlogController {
+
     @Autowired
     BlogService blogService;
-    @Autowired
-    UserRepository userRepository;
-    @Autowired
-    private BlogRepository blogRepository;
 
-    @GetMapping("/count")
+    @GetMapping
     public ResponseEntity<Integer> getAllBlogs() {
-        int countOfBlogs = blogService. getAllBlogs();
+        int countOfBlogs = 0;
+        List<Blog> blogList = blogService.showBlogs();
+        for(Blog blog : blogList){
+            countOfBlogs++;
+        }
         return new ResponseEntity<>(countOfBlogs, HttpStatus.OK);
     }
 
-    @PostMapping("/create")
-    public ResponseEntity<Void> createBlog(@RequestParam Integer userId ,
-                                           @RequestParam String title,
-                                           @RequestParam String content) {
-        blogService.createAndReturnBlog(userId,title,content);
+    @PostMapping
+    public ResponseEntity createBlog(@RequestParam Integer userId ,
+                                     @RequestParam String title,
+                                     @RequestParam String content) {
+
+        blogService.createAndReturnBlog(userId, title, content);
+
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
@@ -47,7 +48,3 @@ public class BlogController {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }
-
-
-
-

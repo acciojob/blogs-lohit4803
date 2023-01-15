@@ -1,17 +1,11 @@
 package com.driver.repositories;
 
 import com.driver.models.User;
+import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
-
 @Repository
-public interface UserRepository {
-    public User findByUsername(String username);
+public interface UserRepository extends CrudRepository<User, Integer> {
 
-    void save(User user);
-
-    void deleteById(int userId);
-
-    List<Object> findById(Integer userId);
+    User findByUsername(String name);
 }

@@ -2,7 +2,6 @@ package com.driver.controller;
 
 import com.driver.models.Blog;
 import com.driver.models.Image;
-import com.driver.repositories.BlogRepository;
 import com.driver.services.ImageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -12,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/images")
 public class ImageController {
+
     @Autowired
     ImageService imageService;
 
@@ -19,13 +19,16 @@ public class ImageController {
     public ResponseEntity<Image> createAndReturn(@RequestBody Blog blog,
                                                  @RequestParam String description,
                                                  @RequestParam String dimensions) {
-        Image image = imageService.createAndReturn(blog,description,dimensions);
+        Image image = null;
+        image = imageService.createAndReturn(blog,description,dimensions);
         return new ResponseEntity<>(image, HttpStatus.CREATED);
     }
 
     @GetMapping("/countImagesInScreen/{id}/{screenDimensions}")
     public ResponseEntity<Integer> countImagesInScreen(@PathVariable int id, @PathVariable String screenDimensions){
         int count = 0;
+        Image image = imageService.findById(id);
+        count = imageService.countImagesInScreen(image,screenDimensions);
         return new ResponseEntity<>(count, HttpStatus.OK);
     }
 
@@ -36,6 +39,3 @@ public class ImageController {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }
-
-
-
