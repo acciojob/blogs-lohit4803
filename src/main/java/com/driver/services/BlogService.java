@@ -31,22 +31,14 @@ public class BlogService {
         //create a blog at the current time
         //updating the blog details
         //Updating the userInformation and changing its blogs
-
-        //       fetching user by userId;
         User currentUser = userRepository1.findById(userId).get();
-//        fetching blogList by that user
         List<Blog> blogListByUser = currentUser.getBlogList();
-//        creating blog
         Blog blog = new Blog();
         blog.setTitle(title);
         blog.setContent(content);
-//        adding new blog to user's bloglist
         blogListByUser.add(blog);
-//        updating user's blogList
         currentUser.setBlogList(blogListByUser);
-//        setting user property of blog
         blog.setUser(currentUser);
-//        saving the user, and it will automatically save blog int table
         userRepository1.save(currentUser);
 
 
