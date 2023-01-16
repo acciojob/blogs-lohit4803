@@ -59,11 +59,7 @@
 			<artifactId>junit-dep</artifactId>
 			<version>4.8.2</version>
 		</dependency>
-		<dependency>
-			<groupId>com.example.blogs</groupId>
-			<artifactId>blogs</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
-		</dependency>
+
 	</dependencies>
 	<build>
 		<plugins>
