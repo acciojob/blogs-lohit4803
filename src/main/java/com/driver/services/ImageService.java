@@ -20,6 +20,10 @@ public class ImageService {
         blog.setImageList(imageListInBlog);
         return image;
     }
+    public void hi(Image image){
+        System.out.print("hi");
+    }
+
 
     public void deleteImage(Image image){
         imageRepository2.delete(image);
