@@ -7,23 +7,26 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
-public class Blog {
+public class Blog
+{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    int id;
+    private int id;
+
     private String title;
+
     private String content;
+
     @CreationTimestamp
     private Date pubDate;
-    //    connecting to user
+
     @ManyToOne
     @JoinColumn
     private User user;
 
-    //    connecting to image
     @OneToMany
     private List<Image> imageList;
-//    getter,setter
+
 
     public int getId() {
         return id;
@@ -72,7 +75,7 @@ public class Blog {
     public void setImageList(List<Image> imageList) {
         this.imageList = imageList;
     }
-//    Constructor
+
 
     public Blog(int id, String title, String content, Date pubDate, User user, List<Image> imageList) {
         this.id = id;
